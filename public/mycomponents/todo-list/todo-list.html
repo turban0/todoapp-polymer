@@ -1,0 +1,29 @@
+<link rel="import" href="../../components/polymer/polymer.html">
+
+<dom-module id="todo-list">
+<style>
+</style>
+<template>
+  <h2>todo list</h2>
+  <ul>
+    <template is="dom-repeat" items="{{todos}}">
+      <li>
+        <div># <span>{{index}}</span></div>
+        <div>Txt: <span>{{item}}</span></div>
+      </li>
+    </template>
+  </ul>
+</template>
+</dom-module>
+
+<script>
+Polymer({
+  is: 'todo-list',
+  properties: {
+    todos: {
+      type: Array,
+      reflectToAttribute: true
+    }
+  }
+});
+</script>

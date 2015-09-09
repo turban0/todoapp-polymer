@@ -7,31 +7,40 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <script src="components/webcomponentsjs/webcomponents.js"></script>
   <link href="components/paper-toolbar/paper-toolbar.html" rel="import">
   <link href="components/paper-input/paper-input.html" rel="import">
   <link href="components/paper-styles/paper-styles.html" rel="import">
+  <link href="components/polymer/polymer.html" rel="import">
+  <link href="mycomponents/todo-list/todo-list.html" rel="import">
 
   <style>
 
   </style>
   <style is="custom-style">
-    #main {
-      width: 300px;
-      margin: 0 auto;
-      background: var(--paper-grey-50);;
-    }
-    paper-toolbar {
-      --paper-toolbar-background: transparent;
-    }
+  #main {
+    width: 300px;
+    margin: 0 auto;
+    background: var(--paper-grey-50);;
+  }
+  paper-toolbar {
+    --paper-toolbar-background: transparent;
+  }
   </style>
-
 </head>
 <body class="fullbleed">
-<div id="main">
-    <paper-toolbar clas="flex">
-      <paper-input class="flex" label="What needs to be done"></paper-input>
-    </paper-toolbar>
-    <div>some content</div>
-</div<
+  <template id="t" is="auto-binding">
+    <div id="main">
+      <paper-toolbar clas="flex">
+        <paper-input class="flex" label="What needs to be done"></paper-input>
+      </paper-toolbar>
+      <todo-list todos="todos"></todo-list>
+    </div>
+  </template>
+
+  <script>
+  var template = document.querySelector('#t');
+  template.todos = ['todo1', 'todo2'];
+  </script>
 </body>
 </html>
