@@ -10,21 +10,28 @@
   <link href="components/paper-toolbar/paper-toolbar.html" rel="import">
   <link href="components/paper-input/paper-input.html" rel="import">
   <link href="components/paper-styles/paper-styles.html" rel="import">
-  <link href="mycomponents/fitme/fitme.html" rel="import">
 
   <style>
-  .sized {
-    width: 50%;
-    height: 50%;
-  }
+
+  </style>
+  <style is="custom-style">
+    #main {
+      width: 300px;
+      margin: 0 auto;
+      background: var(--paper-grey-50);;
+    }
+    paper-toolbar {
+      --paper-toolbar-background: transparent;
+    }
   </style>
 
 </head>
 <body class="fullbleed">
-  <fit-me auto-fit-on-attach class="sized">
+<div id="main">
     <paper-toolbar clas="flex">
       <paper-input class="flex" label="What needs to be done"></paper-input>
     </paper-toolbar>
-  </fit-me>
+    <div>some content</div>
+</div<
 </body>
 </html>

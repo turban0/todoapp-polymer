@@ -4,7 +4,6 @@
   "private": true,
   "directory": "/public/bower",
   "dependencies": {
-    "iron-fit-behavior": "PolymerElements/iron-fit-behavior#~1.0.3",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
     "paper-input": "PolymerElements/paper-input#~1.0.13",
     "paper-styles": "PolymerElements/paper-styles#~1.0.11",
