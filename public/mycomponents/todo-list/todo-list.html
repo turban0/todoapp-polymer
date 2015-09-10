@@ -1,15 +1,37 @@
-<link rel="import" href="../../components/polymer/polymer.html">
+<link href="../../components/polymer/polymer.html" rel="import">
+<link href="../../components/iron-icons/iron-icons.html" rel="import">
+<link href="../../components/paper-icon-button/paper-icon-button.html" rel="import">
+<link href="../../components/paper-checkbox/paper-checkbox.html" rel="import">
 
 <dom-module id="todo-list">
 <style>
+:host {
+  display: block;
+}
+ul {
+  list-style: none;
+  padding-bottom: 1px;
+  padding-left: 15px;
+}
+span {
+  font-size: 24px;
+  line-height: 40px;
+}
+paper-checkbox {
+  line-height: 40px;
+  --paper-checkbox-checked-color: var(--paper-blue-500);
+}
+
+paper-checkbox[checked] + span {
+  text-decoration: line-through;
+  text-decoration-color: var(--paper-blue-500)
+}
 </style>
 <template>
-  <h2>todo list</h2>
-  <ul>
+  <ul class="flex">
     <template is="dom-repeat" items="{{todos}}">
-      <li>
-        <div># <span>{{index}}</span></div>
-        <div>Txt: <span>{{item}}</span></div>
+      <li class="layout horizontal">
+        <paper-checkbox checked="{{item.done}}"></paper-checkbox><span class="flex">{{item.text}}</span><paper-icon-button icon="clear" on-click="removeTodo"></paper-icon-button>
       </li>
     </template>
   </ul>
@@ -24,6 +46,10 @@ Polymer({
       type: Array,
       reflectToAttribute: true
     }
+  },
+  removeTodo: function(e){
+    var index = this.todos.indexOf(e.model.item)
+    template.splice("todos", index, 1);
   }
 });
 </script>

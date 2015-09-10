@@ -10,37 +10,82 @@
   <script src="components/webcomponentsjs/webcomponents.js"></script>
   <link href="components/paper-toolbar/paper-toolbar.html" rel="import">
   <link href="components/paper-input/paper-input.html" rel="import">
+  <link href="components/paper-button/paper-button.html" rel="import">
   <link href="components/paper-styles/paper-styles.html" rel="import">
-  <link href="components/polymer/polymer.html" rel="import">
   <link href="mycomponents/todo-list/todo-list.html" rel="import">
 
   <style>
-
   </style>
   <style is="custom-style">
   #main {
-    width: 300px;
+    font-family: 'Roboto', 'Noto', sans-serif;
+    max-width: 400px;
+    min-width: 300px;
     margin: 0 auto;
     background: var(--paper-grey-50);;
   }
   paper-toolbar {
-    --paper-toolbar-background: transparent;
+    --paper-toolbar-background: var(--paper-blue-500);
+    padding-bottom: 5px;
+  }
+  :root {
+    --paper-input-container-focus-color: white;
+    --paper-input-container-color: white;
+    --paper-input-container-input-color: white;
+    --paper-input-container-invalid-color: white;
   }
   </style>
 </head>
 <body class="fullbleed">
-  <template id="t" is="auto-binding">
+  <template id="t" is="dom-bind">
     <div id="main">
-      <paper-toolbar clas="flex">
-        <paper-input class="flex" label="What needs to be done"></paper-input>
+      <paper-toolbar>
+        <paper-input onkeydown="{{onKeyDown}}" onkeypress="{{onKeyPress}}" class="flex" label="What needs to be done" value="{{input}}" error-message="needs some text!"></paper-input>
+        <paper-button onclick="{{clickAdd}}">Add</paper-button>
       </paper-toolbar>
-      <todo-list todos="todos"></todo-list>
+      <todo-list todos="{{todos}}"></todo-list>
     </div>
   </template>
 
   <script>
   var template = document.querySelector('#t');
-  template.todos = ['todo1', 'todo2'];
+  template.todos = [
+    {
+      text:'todo1',
+      done: true
+    },
+    {
+      text:'todo2',
+      done: false
+    }
+  ];
+
+  var input;
+  window.addEventListener('WebComponentsReady', function(e) {
+    input = document.querySelector('paper-input');
+  });
+
+  template.onKeyDown = function(){
+    input.invalid = false;
+  };
+
+  template.onKeyPress = function(e){
+    if (!e) e = window.event;
+    var keyCode = e.keyCode || e.which;
+    if (keyCode == '13'){
+      template.clickAdd();
+      return false;
+    }
+  };
+
+  template.clickAdd = function(){
+    if(template.input === "") {
+      input.invalid = true;
+      return;
+    }
+    template.push("todos", {text:template.input, done: false});
+    template.input = "";
+  };
   </script>
 </body>
 </html>
