@@ -49,7 +49,7 @@ Polymer({
   },
   removeTodo: function(e){
     var index = this.todos.indexOf(e.model.item)
-    template.splice("todos", index, 1);
+    this.splice("todos", index, 1);
   }
 });
 </script>
